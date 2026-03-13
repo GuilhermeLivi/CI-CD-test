@@ -1,8 +1,0 @@
-version: 2
-
-sources:
-  - name: MENU
-    database: SNOWFLAKE_SAMPLE_DATA
-    schema: TPCH_SF1
-    tables:
-      - name: CUSTOMER
