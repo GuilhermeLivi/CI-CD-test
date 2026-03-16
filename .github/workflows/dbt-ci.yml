@@ -65,7 +65,7 @@ jobs:
 
 
       - name: Run dbt build
-        run: dbt build --target $DEPLOY_ENV
+        run: dbt build --target dev
 
 
       - name: Upload dbt artifacts

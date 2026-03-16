@@ -1,3 +1,3 @@
 
 {{config(materialized = "table")}}
-select * from {{ source('MENU', 'CUSTOMER') }} limit 10
+select * from {{ source('MENU', 'CUSTOMER') }} limit 100
