@@ -1,0 +1,27 @@
+my_project:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      user: GUILHERME
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+      database: DBT_TEST_DEV
+      warehouse: COMPUTE_WH
+      schema: DATAWAREHOUSE_DEV
+
+
+    prod:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+      role: ACCOUNTADMIN
+      database: DBT_TEST_PROD
+      warehouse: COMPUTE_WH
+      schema: DATAWAREHOUSE_PROD
+
+
+
+
