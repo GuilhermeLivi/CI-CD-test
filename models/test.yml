@@ -1,0 +1,8 @@
+version: 2
+
+models:
+  - name: first
+    columns:
+      - name: c_custkey
+        tests:
+          - not_null

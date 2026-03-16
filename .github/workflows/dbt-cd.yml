@@ -1,0 +1,67 @@
+name: dbt Deploy
+
+on:
+  push:
+    branches:
+      - dev
+      - prod
+
+jobs:
+  deploy_dbt:
+
+    runs-on: ubuntu-latest
+
+    env:
+      SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+      SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+      SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+
+      - name: Install dbt
+        run: |
+          python -m pip install --upgrade pip
+          pip install dbt-core dbt-snowflake
+
+
+      - name: Determine environment
+        run: |
+          TARGET_BRANCH="${GITHUB_REF#refs/heads/}"
+
+          if [[ $TARGET_BRANCH == "dev" ]]; then
+            echo "DEPLOY_ENV=dev" >> $GITHUB_ENV
+          elif [[ $TARGET_BRANCH == "prod" ]]; then
+            echo "DEPLOY_ENV=prod" >> $GITHUB_ENV
+          else
+            echo "Invalid branch"
+            exit 1
+          fi
+
+
+      - name: Install dbt dependencies
+        run: dbt deps
+
+
+      - name: Validate dbt connection
+        run: dbt debug --target $DEPLOY_ENV
+
+
+      - name: Run dbt build
+        run: dbt build --target $DEPLOY_ENV
+
+
+      - name: Upload dbt artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dbt-artifacts
+          path: target/
