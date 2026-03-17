@@ -2,11 +2,7 @@ name: Deploy dbt Project
 
 on:
   pull_request:
-    types: [closed]
-    branches:
-      - dev
-      - prod
-  push:
+    types: [opened, synchronize, reopened]
     branches:
       - dev
       - prod
@@ -14,7 +10,6 @@ on:
 jobs:
   deploy_data_environment:
 
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
 
     runs-on: ubuntu-latest
 
@@ -61,7 +56,7 @@ jobs:
 
 
       - name: Validate dbt project
-        run: dbt debug --target $DEPLOY_ENV
+        run: dbt debug --target dev
 
 
       - name: Run dbt build
@@ -71,5 +66,5 @@ jobs:
       - name: Upload dbt artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: dbt-artifacts
-          path: target/
+          name: dbt-logs
+          path: logs/
