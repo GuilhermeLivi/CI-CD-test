@@ -1,4 +1,4 @@
 {{config(materialized = "table")}}
 select * from {{ source('MENU', 'CUSTOMER') }} 
 ORDER BY c_custkey asc
-limit 1005
+limit 1000
