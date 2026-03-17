@@ -1,15 +1,7 @@
-Welcome to your new dbt project!
+This project demonstrates a CI/CD pipeline for data engineering using dbt, Snowflake, and GitHub Actions. It shows how data models can be version-controlled, tested, and deployed across development and production environments.
 
-### Using the starter project
+The pipeline is divided into Continuous Integration (CI), which runs automated dbt tests on every pull request, and Continuous Deployment (CD), which deploys validated changes after merge. This ensures that only tested and validated transformations are promoted.
 
-Try running the following commands:
-- dbt run
-- dbt test
+The project also demonstrates environment separation and the use of GitHub Secrets for secure credential management. Overall, it provides a practical example of building automated and reliable data pipelines.
 
-
-### Resources:
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [chat](https://community.getdbt.com/) on Slack for live discussions and support
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+The whole description of how it all works can be seem in here: https://medium.com/@guilivi_52292/ci-cd-for-dbt-and-snowflake-deploying-from-dev-to-prod-with-github-actions-and-dbt-tests-313413af1cc0
