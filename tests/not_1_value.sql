@@ -1,3 +1,3 @@
 select *
 from {{ ref('first') }}
-where c_custkey != 1
+where c_custkey != 1001
