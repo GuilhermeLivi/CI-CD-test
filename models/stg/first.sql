@@ -1,2 +1,4 @@
 {{config(materialized = "table")}}
-select * from {{ source('MENU', 'CUSTOMER') }} limit 1000
+select * from {{ source('MENU', 'CUSTOMER') }} 
+ORDER BY c_customkey DESC
+limit 1000
