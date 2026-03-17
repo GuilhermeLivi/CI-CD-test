@@ -1,4 +1,4 @@
 {{config(materialized = "table")}}
 select * from {{ source('MENU', 'CUSTOMER') }} 
-ORDER BY c_customkey DESC
+ORDER BY c_custkey DESC
 limit 1000
